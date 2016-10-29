@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>SaltLakeCity_AQI_ Predictions_and_Forecasting</title>
+<title>SaltLakeCity_AQI_Predictions_and_Forecasting</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11805,7 +11805,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Our primary objective is to devise a model to obtain an AQI forecast much like we have a weather forecast.  Additionally, we would like to know how population growth in the valley will be affecting the number of days the AQI will reach over 101, therefore creating a forecast for future years based primarily on population growth. Population growth seems like a good measure for the increasing days of unhealthy air since it drives the amount of energy used, for example from heating and air conditioning of homes and cars on the roads in the valley. On the other hand short term AQI data combined with weather forecasts should be useful in creating a short term forecast model. A short term model can be useful in warning sensitive groups of upcoming poor air quality days. And, if we can create a good predictive long term model, then it can be used as supporting evidence for a need to make a valley wide plan for future energy consumption that could limit the amount of pollutants like PM2.5 which accumulate due to our natural inversion conditions. Additionally, we would like inform our discussion by looking at attitudes for some of the measures which have been implemented or could be implemented, such as limiting use of wood burning fireplaces, addition of more public transportation, and/or if people, in general, take it seriously as an issue. For example trying to see if more people carpool and take public transportation on bad air days and other measures during mandatory action days.</p>
+<p>Our primary objective is to devise a model to obtain an AQI forecast much like we have a weather forecast.  Additionally, we would like to know how population growth in the valley will be affecting the number of days the AQI will reach over 101, therefore creating a forecast for future years based primarily on population growth. Population growth seems like a good measure for the increasing days of unhealthy air since it drives the amount of energy used, for example from heating and air conditioning of homes and cars on the roads in the valley. On the other hand short term AQI data combined with weather forecasts should be useful in creating a short term forecast model. A short term model can be useful in warning sensitive groups of upcoming poor air quality days. And, if we can create a good predictive long term model, then it can be used as supporting evidence for a need to make a valley wide plan for future energy consumption that could limit the amount of pollutants like PM2.5 which accumulate due to our natural inversion conditions.</p>
 
 </div>
 </div>
@@ -11824,7 +11824,12 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We needed to gather and clean a significant amount of data from several sources. For the long term projection model the air quality data was collected from <a href="https://www.epa.gov/outdoor-air-quality-data">https://www.epa.gov/outdoor-air-quality-data</a>. However, each year comes as a separate data-file so it needed to be combined. To calculate projections for population growth we obtained Salt Lake Valley census data from <a href="http://www.census.gov/popest/data/index.html">http://www.census.gov/popest/data/index.html</a>, and followed links to historical data for years after 2010. Data formats from this source varied since the most recent years use newer data formats. For our short term forecasting we will need an accurate 1-5 day weather forecast for the valley and previous days AQI, which we'll obtain by either web scraping <a href="http://www.weather.gov/">http://www.weather.gov/</a> or an API (to be determined). However, we may need further data sources as we continue to process the data from these sites. Some preliminary data analysis, formatting and cleanup as well as a population plot was included in this proposal.</p>
+<p>We will need to gather and clean a significant amount of data from several sources. For the long term
+projection model the air quality data will be collected from <a href="https://www.epa.gov/outdoor-air-qualitydata">https://www.epa.gov/outdoor-air-qualitydata</a>.
+However, each year comes as a separate data-file, so it will need to be cleaned and combined.
+To calculate projections for population growth we already obtained Salt Lake Valley census data from
+<a href="http://www.census.gov/popest/data/index.html">http://www.census.gov/popest/data/index.html</a>, and followed links to obtain historical data for years after 2010. Data formats from this source varied since the most recent years use newer data formats. Therefore, much of this data was formated and cleaned outside of the notebook. For our short term forecasting we will need an accurate 1-5 day weather forecast for the valley and previous days AQI, which we'll obtain by either web scraping <a href="http://www.weather.gov/">http://www.weather.gov/</a> or more likely the API from <a href="http://openweathermap.org/">http://openweathermap.org/</a>. However, we may need further data sources as we continue to process the data from these sites. Some preliminary data analysis, formatting and cleanup was included in this
+proposal.</p>
 
 </div>
 </div>
@@ -11875,14 +11880,14 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Some of the cleanup for the population data and short term climate data was completed in OpenOffice out of convenience. Data clean up in the long term model air quality data set was comparable to the cleanup in Homework #3, although there is a lot more data which needed to be cleaned and combined. On the other hand, we saw a bit more complexity in data cleanup of the population growth data and we expect substantial data cleanup in use of the API for the most recent weather forecasts. We expect that we should be able to give a fairly accurate short term AQI prediction, namely what type of air quality day one expects to have in the upcoming days, and long term projections based on population growth of at least 1-5 years in advance, assuming a reasonable amount of uncertainty and that current trends continue indefinitely.</p>
+<p>Most of the cleanup for the population data and short term climate data was completed in OpenOffice out of convenience. Data clean up in the long term model air quality data set is expected to be comparable to the cleanup in Homework #3, although there is a lot more data which needed to be cleaned and combined. Also, we saw even more complexity in data cleanup of the population growth data and we expect substantial data cleanup in use of the API for the most recent weather forecasts. We expect that we should be able to give a fairly accurate short term AQI prediction, namely what type of air quality day one expects to have in the upcoming days, and long term projections based on population growth of at least 1-5 years in advance, assuming a reasonable amount of uncertainty and that current trends continue indefinitely.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load climate data from Oct. 1st to Oct. 26th for use in short term forecasting. </span>
@@ -11891,10 +11896,14 @@ div#notebook {
 <span class="n">weather_symbols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;FOG OR MIST&#39;</span><span class="p">,</span> <span class="s1">&#39;FOG REDUCING VISIBILITY TO 1/4 MILE OR LESS&#39;</span><span class="p">,</span> <span class="s1">&#39;THUNDER&#39;</span><span class="p">,</span> <span class="s1">&#39;ICE PELLETS&#39;</span><span class="p">,</span> <span class="s1">&#39;HAIL&#39;</span><span class="p">,</span>
                             <span class="s1">&#39;FREEZING RAIN OR DRIZZLE&#39;</span><span class="p">,</span> <span class="s1">&#39;DUSTSTORM OR SANDSTORM: VSBY 1/2 MILE OR LESS&#39;</span><span class="p">,</span> <span class="s1">&#39;SMOKE OR HAZE&#39;</span><span class="p">,</span>
                             <span class="s1">&#39;BLOWING SNOW&#39;</span><span class="p">,</span><span class="s1">&#39;TORNADO&#39;</span><span class="p">],</span>
-                         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weather Type&quot;</span><span class="p">,</span>
-                         <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">])</span>
+                             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weather Type&quot;</span><span class="p">,</span>
+                             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">])</span>
+<span class="c1"># reindex by day of month. </span>
+<span class="n">Oct_weather_data_slv</span> <span class="o">=</span> <span class="n">Oct_weather_data_slv</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Day of month&#39;</span><span class="p">])</span>
+<span class="c1">#Oct_weather_data_slv = Oct_weather_data_slv.drop([&#39;Day of month&#39;], axis = 0)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">weather_symbols</span><span class="p">)</span>
-<span class="n">Oct_weather_data_slv</span>
+<span class="n">Oct_weather_data_slv</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">Oct_weather_data_slv</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11918,11 +11927,34 @@ div#notebook {
 9                                     BLOWING SNOW
 X                                          TORNADO
 Name: Weather Type, dtype: object
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 26 entries, 1 to 26
+Data columns (total 18 columns):
+MAX Temp (F)            26 non-null int64
+MIN Temp (F)            26 non-null int64
+AVG Temp (F)            26 non-null int64
+DEP                     26 non-null int64
+HDD                     26 non-null int64
+CDD                     26 non-null int64
+Percipitation (inch)    26 non-null object
+Snow                    26 non-null object
+12ZDPTH                 26 non-null int64
+Avg wind speed (mph)    26 non-null float64
+Max wind speed (mph)    26 non-null int64
+2minDIR                 26 non-null int64
+MIN                     26 non-null object
+PSBL                    26 non-null object
+Weather type            26 non-null int64
+WX                      10 non-null float64
+Peak wind speed         26 non-null int64
+Wind direction (deg)    26 non-null int64
+dtypes: float64(2), int64(12), object(4)
+memory usage: 3.9+ KB
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11930,7 +11962,6 @@ Name: Weather Type, dtype: object
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Day of month</th>
       <th>MAX Temp (F)</th>
       <th>MIN Temp (F)</th>
       <th>AVG Temp (F)</th>
@@ -11950,11 +11981,31 @@ Name: Weather Type, dtype: object
       <th>Peak wind speed</th>
       <th>Wind direction (deg)</th>
     </tr>
+    <tr>
+      <th>Day of month</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1</td>
+      <th>1</th>
       <td>81</td>
       <td>58</td>
       <td>70</td>
@@ -11975,8 +12026,7 @@ Name: Weather Type, dtype: object
       <td>160</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2</td>
+      <th>2</th>
       <td>81</td>
       <td>55</td>
       <td>68</td>
@@ -11997,8 +12047,7 @@ Name: Weather Type, dtype: object
       <td>210</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>3</td>
+      <th>3</th>
       <td>66</td>
       <td>46</td>
       <td>56</td>
@@ -12019,8 +12068,7 @@ Name: Weather Type, dtype: object
       <td>260</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>4</td>
+      <th>4</th>
       <td>60</td>
       <td>41</td>
       <td>51</td>
@@ -12041,8 +12089,7 @@ Name: Weather Type, dtype: object
       <td>360</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>5</td>
+      <th>5</th>
       <td>58</td>
       <td>41</td>
       <td>50</td>
@@ -12062,468 +12109,6 @@ Name: Weather Type, dtype: object
       <td>35</td>
       <td>280</td>
     </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>59</td>
-      <td>38</td>
-      <td>49</td>
-      <td>-8</td>
-      <td>16</td>
-      <td>0</td>
-      <td>0.01</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>6.4</td>
-      <td>13</td>
-      <td>220</td>
-      <td>M</td>
-      <td>M</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>18</td>
-      <td>190</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>68</td>
-      <td>40</td>
-      <td>54</td>
-      <td>-2</td>
-      <td>11</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>7.0</td>
-      <td>15</td>
-      <td>350</td>
-      <td>M</td>
-      <td>M</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>23</td>
-      <td>330</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>71</td>
-      <td>41</td>
-      <td>56</td>
-      <td>0</td>
-      <td>9</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>5.6</td>
-      <td>10</td>
-      <td>330</td>
-      <td>M</td>
-      <td>M</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>15</td>
-      <td>350</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>77</td>
-      <td>45</td>
-      <td>61</td>
-      <td>5</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>6.9</td>
-      <td>14</td>
-      <td>130</td>
-      <td>M</td>
-      <td>M</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>16</td>
-      <td>140</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>80</td>
-      <td>55</td>
-      <td>68</td>
-      <td>13</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>11.4</td>
-      <td>24</td>
-      <td>180</td>
-      <td>M</td>
-      <td>M</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>31</td>
-      <td>180</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>11</td>
-      <td>70</td>
-      <td>50</td>
-      <td>60</td>
-      <td>5</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>8.2</td>
-      <td>17</td>
-      <td>170</td>
-      <td>M</td>
-      <td>M</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>23</td>
-      <td>160</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>12</td>
-      <td>67</td>
-      <td>43</td>
-      <td>55</td>
-      <td>1</td>
-      <td>10</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>4.2</td>
-      <td>9</td>
-      <td>320</td>
-      <td>M</td>
-      <td>M</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>12</td>
-      <td>330</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>13</td>
-      <td>75</td>
-      <td>44</td>
-      <td>60</td>
-      <td>6</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>6.3</td>
-      <td>15</td>
-      <td>140</td>
-      <td>M</td>
-      <td>M</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>19</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>14</td>
-      <td>74</td>
-      <td>58</td>
-      <td>66</td>
-      <td>12</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>16.1</td>
-      <td>38</td>
-      <td>310</td>
-      <td>M</td>
-      <td>M</td>
-      <td>5</td>
-      <td>8.0</td>
-      <td>50</td>
-      <td>310</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>15</td>
-      <td>76</td>
-      <td>53</td>
-      <td>65</td>
-      <td>12</td>
-      <td>0</td>
-      <td>0</td>
-      <td>T</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>8.8</td>
-      <td>26</td>
-      <td>160</td>
-      <td>M</td>
-      <td>M</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>35</td>
-      <td>170</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>72</td>
-      <td>45</td>
-      <td>59</td>
-      <td>6</td>
-      <td>6</td>
-      <td>0</td>
-      <td>0.01</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>12.7</td>
-      <td>33</td>
-      <td>150</td>
-      <td>M</td>
-      <td>M</td>
-      <td>7</td>
-      <td>8.0</td>
-      <td>42</td>
-      <td>160</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
-      <td>59</td>
-      <td>43</td>
-      <td>51</td>
-      <td>-2</td>
-      <td>14</td>
-      <td>0</td>
-      <td>0.35</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>7.7</td>
-      <td>25</td>
-      <td>340</td>
-      <td>M</td>
-      <td>M</td>
-      <td>6</td>
-      <td>18.0</td>
-      <td>29</td>
-      <td>330</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>18</td>
-      <td>60</td>
-      <td>42</td>
-      <td>51</td>
-      <td>-1</td>
-      <td>14</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>7.2</td>
-      <td>29</td>
-      <td>330</td>
-      <td>M</td>
-      <td>M</td>
-      <td>6</td>
-      <td>NaN</td>
-      <td>33</td>
-      <td>340</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>19</td>
-      <td>56</td>
-      <td>41</td>
-      <td>49</td>
-      <td>-3</td>
-      <td>16</td>
-      <td>0</td>
-      <td>0.01</td>
-      <td>M</td>
-      <td>0</td>
-      <td>5.5</td>
-      <td>13</td>
-      <td>330</td>
-      <td>M</td>
-      <td>M</td>
-      <td>4</td>
-      <td>1.0</td>
-      <td>17</td>
-      <td>320</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>20</td>
-      <td>62</td>
-      <td>36</td>
-      <td>49</td>
-      <td>-2</td>
-      <td>16</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>4.7</td>
-      <td>13</td>
-      <td>340</td>
-      <td>M</td>
-      <td>M</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>15</td>
-      <td>340</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>21</td>
-      <td>68</td>
-      <td>37</td>
-      <td>53</td>
-      <td>2</td>
-      <td>12</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>4.0</td>
-      <td>12</td>
-      <td>290</td>
-      <td>M</td>
-      <td>M</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>14</td>
-      <td>280</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>22</td>
-      <td>70</td>
-      <td>40</td>
-      <td>55</td>
-      <td>4</td>
-      <td>10</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>4.6</td>
-      <td>15</td>
-      <td>290</td>
-      <td>M</td>
-      <td>M</td>
-      <td>1</td>
-      <td>18.0</td>
-      <td>18</td>
-      <td>290</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>23</td>
-      <td>76</td>
-      <td>44</td>
-      <td>60</td>
-      <td>10</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>6.7</td>
-      <td>18</td>
-      <td>160</td>
-      <td>M</td>
-      <td>M</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>24</td>
-      <td>160</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>24</td>
-      <td>67</td>
-      <td>59</td>
-      <td>63</td>
-      <td>13</td>
-      <td>2</td>
-      <td>0</td>
-      <td>T</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>13.8</td>
-      <td>31</td>
-      <td>170</td>
-      <td>M</td>
-      <td>M</td>
-      <td>8</td>
-      <td>18.0</td>
-      <td>39</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>25</td>
-      <td>70</td>
-      <td>51</td>
-      <td>61</td>
-      <td>11</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>9.0</td>
-      <td>21</td>
-      <td>180</td>
-      <td>M</td>
-      <td>M</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>24</td>
-      <td>180</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>26</td>
-      <td>75</td>
-      <td>49</td>
-      <td>62</td>
-      <td>13</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>8.3</td>
-      <td>22</td>
-      <td>150</td>
-      <td>M</td>
-      <td>M</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>28</td>
-      <td>160</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -12537,11 +12122,12 @@ Name: Weather Type, dtype: object
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load salt lake county population data for years 1990 through 2015</span>
 <span class="n">sl_county_1990to2015</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;popEstimate_SL_county_1990-2015.csv&quot;</span><span class="p">)</span>
+<span class="n">sl_county_1990to2015</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="n">sl_county_1990to2015</span>
 </pre></div>
 
@@ -12553,7 +12139,46 @@ Name: Weather Type, dtype: object
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1 entries, 0 to 0
+Data columns (total 28 columns):
+&#39;NAME&#39;                 1 non-null object
+&#39;STNAME&#39;               1 non-null object
+&#39;ESTIMATESBASE1990&#39;    1 non-null int64
+&#39;POPESTIMATE1991&#39;      1 non-null int64
+&#39;POPESTIMATE1992&#39;      1 non-null int64
+&#39;POPESTIMATE1993&#39;      1 non-null int64
+&#39;POPESTIMATE1994&#39;      1 non-null int64
+&#39;POPESTIMAT1995&#39;       1 non-null int64
+&#39;POPESTIMATE1996&#39;      1 non-null int64
+&#39;POPESTIMATE1997&#39;      1 non-null int64
+&#39;POPESTIMATE1998&#39;      1 non-null int64
+&#39;POPESTIMATE1999&#39;      1 non-null int64
+&#39;CENSUS2000POP&#39;        1 non-null int64
+&#39;POPESTIMATE2001&#39;      1 non-null int64
+&#39;POPESTIMATE2002&#39;      1 non-null int64
+&#39;POPESTIMATE2003&#39;      1 non-null int64
+&#39;POPESTIMATE2004&#39;      1 non-null int64
+&#39;POPESTIMATE2005&#39;      1 non-null int64
+&#39;POPESTIMATE2006&#39;      1 non-null int64
+&#39;POPESTIMATE2007&#39;      1 non-null int64
+&#39;POPESTIMATE2008&#39;      1 non-null int64
+&#39;POPESTIMATE2009&#39;      1 non-null int64
+&#39;CENSUS2010POP&#39;        1 non-null int64
+&#39;POPESTIMATE2011&#39;      1 non-null int64
+&#39;POPESTIMATE2012&#39;      1 non-null int64
+&#39;POPESTIMATE2013&#39;      1 non-null int64
+&#39;POPESTIMATE2014&#39;      1 non-null int64
+&#39;POPESTIMATE2015&#39;      1 non-null int64
+dtypes: int64(26), object(2)
+memory usage: 304.0+ bytes
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12561,34 +12186,34 @@ Name: Weather Type, dtype: object
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>NAME</th>
-      <th>STNAME</th>
-      <th>ESTIMATESBASE1990</th>
-      <th>POPESTIMATE1991</th>
-      <th>POPESTIMATE1992</th>
-      <th>POPESTIMATE1993</th>
-      <th>POPESTIMATE1994</th>
-      <th>POPESTIMAT1995</th>
-      <th>POPESTIMATE1996</th>
-      <th>POPESTIMATE1997</th>
+      <th>'NAME'</th>
+      <th>'STNAME'</th>
+      <th>'ESTIMATESBASE1990'</th>
+      <th>'POPESTIMATE1991'</th>
+      <th>'POPESTIMATE1992'</th>
+      <th>'POPESTIMATE1993'</th>
+      <th>'POPESTIMATE1994'</th>
+      <th>'POPESTIMAT1995'</th>
+      <th>'POPESTIMATE1996'</th>
+      <th>'POPESTIMATE1997'</th>
       <th>...</th>
-      <th>POPESTIMATE2006</th>
-      <th>POPESTIMATE2007</th>
-      <th>POPESTIMATE2008</th>
-      <th>POPESTIMATE2009</th>
-      <th>CENSUS2010POP.1</th>
-      <th>POPESTIMATE2011</th>
-      <th>POPESTIMATE2012</th>
-      <th>POPESTIMATE2013</th>
-      <th>POPESTIMATE2014</th>
-      <th>POPESTIMATE2015</th>
+      <th>'POPESTIMATE2006'</th>
+      <th>'POPESTIMATE2007'</th>
+      <th>'POPESTIMATE2008'</th>
+      <th>'POPESTIMATE2009'</th>
+      <th>'CENSUS2010POP'</th>
+      <th>'POPESTIMATE2011'</th>
+      <th>'POPESTIMATE2012'</th>
+      <th>'POPESTIMATE2013'</th>
+      <th>'POPESTIMATE2014'</th>
+      <th>'POPESTIMATE2015'</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Salt Lake County</td>
-      <td>Utah</td>
+      <td>'Salt Lake County'</td>
+      <td>'Utah'</td>
       <td>729893</td>
       <td>751023</td>
       <td>774408</td>
@@ -12635,395 +12260,10 @@ Name: Weather Type, dtype: object
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will plot population VS. number of days AQI is over 101 and apply regression analysis and extrapolation on this data. We will also attempt to visualize how precipitation, temperature and wind speed effect the short term prediction model. Additionally, we will also plot the number of mentions about our bad air and see if it matches the actual poor AQI. A simple population plot vs. time in years was added below as part of preliminary analysis.</p>
+<p>We will plot population VS. number of days AQI is over 101 and apply regression analysis and extrapolation on this data. We will also attempt to visualize how precipitation, temperature and wind speed effect the short term prediction model.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># preliminary unformulated plot of population over time</span>
-<span class="n">sl_county_1990to2015_data</span> <span class="o">=</span> <span class="n">sl_county_1990to2015</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;NAME&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sl_county_1990to2015_data</span> <span class="o">=</span> <span class="n">sl_county_1990to2015</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;STNAME&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sl_county_1990to2015_data</span><span class="o">.</span><span class="n">boxplot</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Anaconda3\lib\site-packages\ipykernel\__main__.py:4: FutureWarning: 
-The default value for &#39;return_type&#39; will change to &#39;axes&#39; in a future release.
- To use the future behavior now, set return_type=&#39;axes&#39;.
- To keep the previous behavior and silence this warning, set return_type=&#39;dict&#39;.
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13039,7 +12279,7 @@ yMjIyMjIyMjIyMjYT/F/AB18j5Ih+REAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For our short term model, we will combine the weather predictions and past month data to create a forecast model for up to a week in advance. On the other hand, for the long term model we will see how well population growth is correlated with past population growth by looking at past population data and AQI than projecting for years to come. Then expand the model by including past climate information to normalize for drier than average years.</p>
+<p>For our short term model, we will combine the weather predictions and past month data to create a forecast model for up to a week in advance. On the other hand, for the long term model we will see how well population growth is correlated with past  past population data and AQI than project for years to come. Additionally, we will expand the model by including past climate information to normalize for drier than average years.</p>
 
 </div>
 </div>
@@ -13061,9 +12301,9 @@ yMjIyMjIyMjIyMjYT/F/AB18j5Ih+REAAAAASUVORK5CYII=
 <p>We plan on mostly working together to achieve each project deadline. However, some work will need to be divided out if we are unable to reach each week's objective during team meetings.</p>
 <p>By Friday 11-04-16</p>
 <ul>
-<li>Obtain and format long term climate, population and AQI data. (Dzevad)</li>
-<li>Obtain and format short term climate and AQI data. (Michael) </li>
-<li>Obtain current weather forecast using an API. (Rob)</li>
+<li>Obtain and format long term climate, population and AQI data. (Rob, Michael and Dzevad)</li>
+<li>Obtain and format short term climate and AQI data. (Rob, Michael and Dzevad)</li>
+<li>Obtain current weather forecast using an API. (Rob, Michael and Dzevad)</li>
 </ul>
 <p>By Friday 11-11-16</p>
 <ul>
@@ -13090,19 +12330,6 @@ yMjIyMjIyMjIyMjYT/F/AB18j5Ih+REAAAAASUVORK5CYII=
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
     </div>
   </div>

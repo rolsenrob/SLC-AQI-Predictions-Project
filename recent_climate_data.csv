@@ -1,4 +1,4 @@
-'Date','MAXtemp(F)','MINtemp(F)','AVGtemp(F)','Percipitation','Snow','Avgwindspeed(mph)','MaxWindSpeed(mph)'
+Date,MAXtemp(F),MINtemp(F),AVGtemp(F),Percipitation,Snow,Avgwindspeed(mph),MaxWindSpeed(mph)
 11/01/2011,50,32,41,0.31,0.01,12.7,35
 11/02/2011,48,27,38,0,0,4.7,13
 11/03/2011,58,28,43,0,0,12.3,29
